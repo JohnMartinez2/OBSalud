@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBSalud - pacientes</title>
+    <link rel="stylesheet" href="../css/dpacientes.css">
+    <%- include ('partials/head.html')%>
+</head>
+
+<body>
+   <%- include ('partials/header.html')%> 
+   <main>
+       
+        <section class="principal">
+            <% p.map(pac =>{%>
+                <div class="paciente">
+                    <p>Nombre:<%=pac.name%></p>
+                    <p>Edad:<%=pac.edad%></p>
+                    <p>Email:<%=pac.email%></p>
+                    <p>Identidad:<%=pac.identidad%></p>
+                    <p>Celular:<%=pac.celular%></p>
+                    <p>Peso:<%=pac.peso%></p>
+                    <p>Altura:<%=pac.altura%></p>
+                    <p>IMC:<%=((pac.peso/pac.altura**2)*10000).toFixed(4) %></p>
+                    <p>Diagnostico: <%=pac.diagnostico%></p>
+                    <p>Plan de Nutricion: <%=pac.planNutricion%></p>
+                </div>  
+            <%})%>
+        </section>
+
+    </main> 
+    <%- include ('partials/footer.html')%>
+</body>
+
+</html>

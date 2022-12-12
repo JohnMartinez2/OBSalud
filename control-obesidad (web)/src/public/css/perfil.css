@@ -1,0 +1,95 @@
+.perfil .body,
+.perfil {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+}
+
+.perfil .body {
+    width: 70%;
+    position: relative;
+    max-width: 750px;
+}
+
+.perfil .body .titulo {
+    display: block;
+    width: 100%;
+    font-size: 2.00em;
+    margin-bottom: 0.5rem;
+}
+
+.perfil .body .titulo1 {
+    display: block;
+    width: 100%;
+    font-size: 1.35em;
+    margin-bottom: 0.5rem;
+}
+
+.perfil .body .titulo2 {
+    display: block;
+    width: 100%;
+    font-size: 1.00em;
+    margin-bottom: 0.5rem;
+}
+
+.perfil .body .return {
+    display: block;
+    width: 100%;
+    font-size: 2.00em;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.perfil .footer,
+.perfil .nombre,
+.perfil .return {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .2);
+    background-color: #fff;
+    border-radius: 15px;
+    width: 100%;
+}
+
+.perfil .nombre {
+    margin-bottom: 1.25rem;
+    text-align: center;
+}
+
+.perfil .datos {
+    width: 50%;
+    list-style: none;
+}
+
+.perfil .datos li {
+    padding: 5px 0;
+}
+
+.perfil .datos li>.icono {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
+/*---------------------------------------------*/
+
+@media screen and (max-width: 800px) {
+
+    .portada{
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .portada .imagen img{
+        margin-top: 50px;
+        width: 300px;
+    }
+
+    .portada .texto{
+        width: auto;
+    }
+
+}

@@ -1,0 +1,296 @@
+.cuenta{
+    display: none !important;
+}
+
+.usuario{
+    display: flex !important;
+}
+
+.cont-eps{
+    display: none !important;
+}
+
+/*---------------------------------*/
+
+.principal{
+    display: flex;
+    justify-content: space-between;
+    border-top: 2px solid rgba(0, 0, 0, 0.501);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.501);
+}
+
+.cards{
+    display: flex;
+    flex-direction: column;
+    min-height: 50vh;
+    max-height: 80vh;
+    width: 20%;
+    background-color: rgb(247, 247, 247);
+    overflow: auto;
+    border-right: 1px solid rgba(0, 0, 0, 0.501);
+}
+
+.cards h2{
+    padding: 20px;
+    height: 80px;
+    background-color: rgb(247, 247, 247);
+}
+
+.card{
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    height: 80px;
+    cursor: pointer;
+    background-color: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.255);
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.255);
+}
+
+.card p{
+    font-weight: bold;
+}
+
+.card:hover{
+    background-color: rgb(243, 243, 243);
+}
+
+.card img{
+    margin-right: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+.paciente{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.datos{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.255);
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.255);
+}
+
+.datos .card{
+    border: none;
+    box-shadow: none;
+    cursor: default;
+}
+
+.datos .card:hover{
+    background: none;
+}
+
+.datos .info{
+    display: flex;
+}
+
+.datos .info div{
+    margin-right: 20px;
+}
+
+.chat{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.mensages{
+    padding: 20px;
+    height: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+    max-height: 15rem;
+    overflow-y: auto;
+}
+
+.chat form{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: rgb(247, 247, 247);
+}
+
+.chat form input{
+    width: 100%;
+    height: 48px;
+    padding: 8px 16px;
+    background-color: #f2f9ff;
+    border: 1px solid #cedced;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: rgb(48, 48, 48);
+    border-radius: 5px;
+}
+
+.chat form button{
+    margin: 0 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border: none;
+    background: none;
+}
+
+.diagnostico{
+    padding: 40px 10%;
+}
+
+.diagnostico h2{
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.diagnostico .datosp{
+    display: flex;
+    padding: 20px 0;
+    width: 80%;
+}
+
+.datosp .column{
+    margin-right: 20px;
+}
+
+.datosp .column .input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.diagnostico label{
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.diagnostico input{
+    height: 48px;
+    padding: 8px 16px;
+    background-color: #f2f9ff;
+    border: 1px solid #cedced;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: rgb(48, 48, 48);
+    border-radius: 5px;
+}
+
+.diagnostico textarea{
+    padding: 8px 16px;
+    background-color: #f2f9ff;
+    border: 1px solid #cedced;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: rgb(48, 48, 48);
+    border-radius: 5px;
+}
+
+.diagnostico button{
+    background-color: rgb(0, 110, 143);
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+    width: 100px;
+    height: 42px;
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.diagnostico span{
+    width: 100px;
+    height: 100px;
+    background-color: black;
+}
+
+.espec {
+    display: flex;
+    flex-direction: column;
+}
+
+.espec .input{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.espec .input textarea{
+    margin-left: 5px;
+}
+
+.nutric {
+    display: flex;
+    flex-direction: column;
+}
+
+.nutric .input{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+hr{
+    margin: 10px 0;
+}
+
+
+/*---------------------------------------------*/
+
+@media screen and (max-width: 800px) {
+
+    .paciente{
+        font-size: 0.8rem;
+    }
+
+    .cards{
+        text-align: center;
+    }
+
+    .card{
+        font-size: 0.8rem;
+    }
+
+    .cards h2{
+        font-size: 0.8rem;
+        padding: 20px 5px;
+    }
+
+    .card{
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+    }
+
+    .card img{
+        margin: 0;
+        margin-bottom: 10px;
+        width:  40px;
+        height: 40px;
+    }
+
+    .diagnostico .datosp{
+        flex-direction: column;
+    }
+    
+
+}
+.msg-content{
+    margin-bottom:5px;
+}
+.msg-content div{
+    border-radius:4px;
+    padding:10px;
+}
+.msg-content .float-r{
+    float:right;
+    background-color: rgb(0, 110, 143);
+    color:white;
+}
+.msg-content .float-l{
+    float:left;
+    background-color: cornflowerblue;
+    color:white;
+}

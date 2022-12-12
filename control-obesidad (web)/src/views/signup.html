@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <input name="name" type="text" placeholder="Nombre">
+    <input name="edad" type="number" placeholder="edad">
+    <input name="identidad" type="number" placeholder="identidad">
+    <input name="celular" type="number" placeholder="celular">
+    <input name="peso" type="number" placeholder="peso">
+    <input name="altura" type="number" placeholder="altura">
+    <input name="email" type="email" placeholder="email">
+    <input name="pass" type="password" placeholder="contraseña">
+    <select name="rol" id="rol">
+        <option >---</option>
+        <option value="1">Paciente</option>
+        <option value="2">Medico</option>
+    </select>
+    <input type="submit" onclick="send()">
+    <script>
+        function send(){
+            let inputs={}
+            document.querySelectorAll("input").forEach(element => {
+                inputs[element.name]=element.value
+            });
+            inputs.rol=document.querySelector("#rol").value
+            fetch("/signup",{
+                method:"post",
+                body:JSON.stringify({inputs}),
+                headers:{'Content-Type': 'application/json'}
+            }).then(e=>e.json())
+            .then(e=>{
+                if(e.est==200){
+                    alert("OK")
+                }else{
+                    alert("Error")
+                }
+            })
+        }
+    </script>
+</body>
+</html>

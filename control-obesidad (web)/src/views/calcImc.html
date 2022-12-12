@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBSalud - calculo Imc</title>
+    <link rel="stylesheet" href="../css/calcImc.css">
+    <%- include ('partials/head.html')%>
+</head>
+
+<body>
+   <%- include ('partials/header.html')%> 
+   <main>
+       
+        <section class="portada">
+
+            <div class="info">
+                <div class="texto">
+                    <h1>Calculo IMC</h1><br>
+                    <h3>IMC = (Kg / cm^2) * 10000</h3>
+                    
+                    <form onsubmit="return calcIMC()">
+                        <label for="peso">Su peso (Kg): </label>
+                        <input type="number" id="peso" value="<%= user.peso %>" required>
+                        <label for="altura">Su altura (Cm): </label>
+                        <input type="number" id="altura" value="<%= user.altura %>" required>
+                        <button >Calcular</button>
+                    </form>
+
+                    <label for="imc">Su Imc es:</label>
+                    <input type="text" id="imc" readonly>
+                </div>
+            </div>
+            
+            <div class="imagen">
+                <img src="../img/portada3.jpg" alt="">
+            </div>
+        </section>
+
+    </main> 
+    <%- include ('partials/footer.html')%>
+</body>
+<script>
+    window.onload=()=>{
+        calcIMC()
+    }
+    function calcIMC(){
+        let peso=document.querySelector("#peso").value
+        let altura=document.querySelector("#altura").value
+        let imc=document.querySelector("#imc")
+        imc.value=((peso/altura**2)*10000).toFixed(4)
+        fetch("/updateData",{
+            method:"post",
+            body:JSON.stringify({peso,altura,token:"<%= user.token%>"}),
+            headers:{'Content-Type': 'application/json'}
+        })
+        return false;
+    }
+</script>
+</html>

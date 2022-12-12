@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBSalud - perfil</title>
+    <link rel="stylesheet" href="../css/perfil.css">
+    <%- include ('partials/head.html')%>
+</head>
+
+<body>
+    <%- include ('partials/header2.html')%> 
+   <main>
+       
+    <section class="perfil">
+        <div class="body">
+            <br>
+            <div class="nombre">
+                <h3 class="titulo">Perfil del Usuario</h3>
+            </div>
+            <div class="nombre">
+                <h3 class="titulo1">Nombre: <%= user.name %></h6>
+                <h3 class="titulo2">Direccion de correo electronico: <%= user.email%></h3>
+            </div>
+            <div class="footer">
+                <ul class="datos">
+                    <li><i class="icono fas fa-hashtag"></i> Edad: <%= user.edad%></li>
+                    <li><i class="icono fas fa-phone-alt"></i> Numero de celular: <%= user.celular%></li>
+                    <li><i class="icono fas fa-address-card"></i> Numero de identidad: <%= user.identidad%></li>
+                    <li><i class="icono fas fa-file-prescription"></i> Diagnostico: <%=user.diagnostico%></li>
+                </ul>
+                <ul class="datos">
+                    <li><i class="icono fas fa-weight"></i> Peso: <%= user.peso%></li>
+                    <li><i class="icono fas fa-male"></i> Altura: <%= user.altura%></li>
+                    <li><i class="icono fas fa-bars"></i> IMC: <%=((user.peso/user.altura**2)*10000).toFixed(4) %></li>
+                    <li><i class="icono fas fa-star-of-life"></i> Plan de Nutricion: <%=user.planNutricion%></li>
+                </ul>
+            </div><br>
+            <!--div class="return">
+                <% if(user.rol==1){%>
+                    <li><i class="icono fas fa-home"></i><a href="../home/<%= user.token %>">Inicio</a></li>
+                <% }%>
+            </div-->
+        </div>
+    </section>
+
+    </main> <br>
+    <%- include ('partials/footer.html')%>
+</body>
+
+</html>

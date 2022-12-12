@@ -1,0 +1,130 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10%;
+    padding-bottom: 100px;
+    height: 20vh;
+    background-image: url("../../img/fondo.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: unset;
+    background-position: center;
+}
+
+.menu{
+    display: flex;
+    align-items: center;
+    color: white;
+}
+.menu ul li a{
+    width: max-content;
+    font-weight: bold;
+}
+.menu ul li a:hover{
+    color: rgb(221, 221, 221);
+    border-bottom: 1px solid rgb(223, 223, 223);
+}
+
+.menu-bar{
+    display: none;
+    font-size: 2rem;
+    margin-left: .5rem;
+    margin-right: 1.5rem;
+    cursor: pointer;
+}
+
+.logo{
+    margin-right: 30px;
+}
+
+.cuenta{
+    display: flex;
+    align-items: center;
+}
+
+.usuario{
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.usuario img{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.usuario a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.usuario a:hover{
+    color: rgb(224, 224, 224);
+}
+
+header ul{
+    display: flex;
+}
+
+header ul li{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 0 10px;
+}
+
+header ul li a{
+    color: white;
+    text-decoration: none;
+}
+
+/*-----------------------------------*/
+
+.btn-iniciar{
+    padding: 5px 15px;
+    border: 2px solid  rgb(255, 255, 255);
+    border-radius: 5px;
+}
+
+.btn-registro{
+    padding: 7px 18px;
+    background-color: rgb(2, 182, 223);
+    border-radius: 5px;
+}
+
+/*----------------------------------*/
+
+@media screen and (max-width: 800px) {
+    
+    header{
+        height: 15vh;
+        padding: 20px;
+        padding-top: 10px;
+    }
+
+    .lista{
+        display: none;
+    }
+
+    .menu-bar{
+        display: block;
+    }
+
+    .logo h1{
+        font-size: 1.5rem;
+    }
+
+}
+
+@media screen and (max-width: 400px) {
+
+    header ul li{
+        margin: 0;
+    }
+}

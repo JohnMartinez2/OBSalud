@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBSalud - Login</title>
+    <link rel="stylesheet" href="css/login.css">
+    <%- include ('partials/head.html')%>
+</head>
+
+<body>
+    <main>
+
+        <section class="principal">
+            <h2>OBSalud</h2>
+            <form onsubmit="return  send()">
+                <h3>Iniciar sesión</h3>
+                
+                <label for="email"><b>Dirección de correo electrónico</b></label>
+                <input type="email" id="email" required>
+                <label for="password"><b>Contraseña</b></label>
+                <input type="password" id="pass" required>
+
+                <button>Acceder</button>
+                <a class="btn-reg" href="register">Crear cuenta</a>
+                <span></span>
+                <a href="#">¿Olvidó su contraseña?</a>
+                <a href="#">Política de tratamiento de datos personales</a>
+            </form>
+        </section>
+
+    </main>
+    <%- include ('partials/footer.html')%>
+</body>
+<script>
+    function send(){
+        let email=document.querySelector("#email").value
+        let pass=document.querySelector("#pass").value
+        fetch("/login",{
+            method:"post",
+            body:JSON.stringify({email,pass}),
+            headers:{'Content-Type': 'application/json'}
+        }).then(e=>e.json())
+        .then(e=>{
+            if(e.est==200){
+                if(e.user.rol==1){
+                    window.location.href="/home/"+e.user.token
+                }else{
+                    window.location.href="/homeDoc/"+e.user.token
+                }
+            }else{
+                alert("Error "+e.est+";"+e.msg)
+            }
+        })
+        return false;
+    }
+</script>
+</html>

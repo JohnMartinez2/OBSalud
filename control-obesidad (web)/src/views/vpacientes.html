@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBSalud - pacientes</title>
+    <link rel="stylesheet" href="../css/vpacientes.css">
+    <%- include ('partials/head.html')%>
+</head>
+
+<body>
+   <%- include ('partials/header.html')%> 
+   <main>
+       
+        <section class="principal">
+        <div class="cards"></div>
+
+            <div class="paciente">
+                <div class="datos">
+                    <div class="card">
+                        <img class="card-img" src="../img/logo-cuenta.png" alt="">
+                        <div class="card-info">
+                            <p></p>
+                            <span></span>
+                        </div>
+                    </div>
+                   <% if(user.rol!=1){ %> 
+
+                    <div class="info">
+                        <div>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                <% } %> 
+                </div>
+                <div class="chat">
+                    <div class="mensages">
+                        
+                    </div>
+                    <form onsubmit="return sendMsg()">
+                        <input type="text" id="msg" placeholder="Mensage" autocomplete="off">
+                        <button><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+
+            </div>
+
+        </section> 
+        <% if(user.rol!=1){ %> 
+        <section class="diagnostico">
+            <h2>Asignar diagnostico</h2>
+            <form action="">
+                <h3>Datos</h3>
+                <hr>
+                <div class="datosp">
+                    <div class="column">
+                        <div class="input">
+                            <label for="">Nombre:</label>
+                            <input type="text" readonly>
+                        </div>
+                        <div class="input">
+                            <label for="">Correo:</label>
+                            <input type="text" readonly>
+                        </div>
+                        <div class="input">
+                            <label for="">Edad:</label>
+                            <input type="text" readonly>
+                        </div>
+                        <div class="input">
+                            <label for="">Identidad:</label>
+                            <input type="text" readonly>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="input">
+                            <label for="">Imc:</label>
+                            <input type="text" readonly>
+                        </div>
+                        <div class="input">
+                            <label for="">Peso:</label>
+                            <input type="text" readonly>
+                        </div>
+                        <div class="input">
+                            <label for="">Altura:</label>
+                            <input type="text" readonly>
+                        </div>
+                        <div class="input">
+                            <label for="">Celular:</label>
+                            <input type="text" readonly>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+            <hr>
+            <span></span>
+            <form class="espec" onsubmit="return false">
+                <div class="input">
+                    <% if(user.rol==3){ %> 
+                        <label for="">Diagnotico:</label>
+                    <% } else{%>
+                        <label for="">Plan de Nutricion:</label>
+                    <% } %>
+                <textarea name="" id="" cols="30" rows="5"></textarea>
+                </div>
+                <button onclick="update()">Asignar</button>
+            </form>
+            <% } %> 
+            
+
+        </section>
+
+    </main> 
+    <%- include ('partials/footer.html')%>
+</body>
+<script>
+    ////////////////////////
+      window.onload=()=>{
+        loadUsuarios()
+    }
+    const socket=io();
+    socket.on("msg-server",(m)=>{
+      
+      loadMSG(m)
+    })
+    <% if(user.rol!=1){ %> 
+        socket.emit("newDocOnline",{doc: {
+                id:'<%=user.id%>',
+                name:'<%=user.name%>',
+                rol:'<%=user.rol%>'}}%>)
+    <% } %>
+    //
+  
+    socket.on("updateuser",loadUsuarios)
+    function loadMSG(m){
+        document.querySelector(".chat>.mensages").innerHTML=" "
+        m.map(mg=>document.querySelector(".chat>.mensages").innerHTML+=`
+        <div class="msg-content">
+            <div class="${(mg.out.id=="<%=user.id %>")?"float-r":"float-l"}">
+                ${mg.msg}
+            </div>
+        </div>
+        `)
+        document.querySelector(".chat>.mensages").scrollTop=document.querySelector(".chat>.mensages").scrollHeight*100
+    }
+    function loadUsuarios(){
+        <% if(user.rol!=1){ %> 
+            fetch("../pacientesChat/<%= user.token%>").then(e=>e.json())
+            .then(e=>{
+                let areaPacientes=document.querySelector(".principal>.cards")
+                areaPacientes.innerHTML="<h2>Usuarios</h2>"
+                for (const key in e.u.pac) {
+                    areaPacientes.innerHTML+=`
+                    <div class="card" onclick="initChat('${JSON.stringify({...e.u,pac:e.u.pac[key]}).replace(/"/g,'\`')}')">
+                            <img src="../img/logo-cuenta.png" alt="">
+                            <div class="card-info">
+                                <p>${e.u.pac[key].name}</p>
+                                <span>${e.u.pac[key].edad} años</span>
+                            </div>
+                        </div>`;
+                }
+            })
+        <% }else{ %>
+            fetch("../docChat/<%= user.token%>").then(e=>e.json())
+            .then(e=>{
+                let areaPacientes=document.querySelector(".principal>.cards")
+                areaPacientes.innerHTML="<h2>Usuarios</h2>"
+                for (const key in e.u) {
+                    areaPacientes.innerHTML+=`
+                    <div class="card" onclick="initChat('${JSON.stringify({...e.u[key]}).replace(/"/g,'\`')}')">
+                            <img src="../img/logo-cuenta.png" alt="">
+                            <div class="card-info">
+                                <p>${e.u[key].name}</p>
+                                <span>${(e.u[key].rol==2)?"Nutricionista":"Especialista"}</span>
+                            </div>
+                        </div>`;
+                }
+            })
+        <% }%>
+                
+        
+    }
+    let USERCHAT={}
+    function initChat(obj){
+        obj=JSON.parse(obj.replace(/`/g,'"'))
+      
+        <% if(user.rol!=1){ %>
+            USERCHAT={id:"<%= user.id%>",name:"<%= user.name%>",rol:"<%= user.rol%>",pac:obj.pac}
+            socket.emit("connectDoc",USERCHAT)
+            let datos=document.querySelector(".paciente>.datos>.card>.card-info").children
+            datos[0].innerHTML=obj.pac.name
+            datos[1].innerHTML=obj.pac.edad
+            document.querySelector(".info").children[0].children[2].innerHTML="Calculo de Imc:"+((obj.pac.peso/obj.pac.altura**2)*10000).toFixed(2)
+            fetch("../getInfoPaciente/<%= user.token%>/"+obj.pac.id).then(e=>e.json()).
+            then(e=>{
+                let input=document.querySelectorAll(".datosp>.column>.input>input")
+                input[0].value=e.info.name
+                input[1].value=e.info.email
+                input[2].value=e.info.edad
+                input[3].value=e.info.identidad
+                input[4].value=((obj.pac.peso/obj.pac.altura**2)*10000).toFixed(2)
+                input[5].value=e.info.peso
+                input[6].value=e.info.altura
+                input[7].value=e.info.celular
+                document.querySelector(".info").children[0].children[0].innerHTML=(e.info.diagnostico.length>1)?"Diagnosticado:Si":"Diagnosticado:No";
+                document.querySelector(".info").children[0].children[1].innerHTML=(e.info.planNutricion.length>1)?"Plan de nutricion:Si":"Plan de nutricion:No";
+                <% if(user.rol==3){ %>
+                document.querySelector(".espec>.input>textarea").value=e.info.diagnostico
+                <% }else{ %>
+                document.querySelector(".espec>.input>textarea").value=e.info.planNutricion
+                <% } %>
+            })
+            <% }else{%>
+            USERCHAT={id:obj.id,name:obj.name,rol:obj.rol,pac:{id:"<%= user.id%>",name:"<%= user.name%>",peso:"<%= user.peso%>",altura:"<%= user.altura%>",edad:"<%= user.edad%>"}}
+            socket.emit("connectPac",USERCHAT)
+            let datos=document.querySelector(".paciente>.datos>.card>.card-info").children
+            datos[0].innerHTML=obj.name
+            datos[1].innerHTML=(obj.rol==2)?"Nutricionista":"Especialista"
+        <%  } %>
+    }
+    function sendMsg(){
+        socket.emit("msg",{...USERCHAT,
+            msg:{
+                out:{
+                    id:"<%= user.id%>",
+                    name:"<%= user.name%>"
+                },
+                msg:document.querySelector("#msg").value
+            }})
+            document.querySelector("#msg").value=""
+        socket.emit("getMsg",USERCHAT)
+        return false;
+    }
+    function update(){
+        <% if(user.rol==2){ %>
+            fetch("/updateData",{
+            method:"post",
+            body:JSON.stringify({id:USERCHAT.pac.id,planNutricion:document.querySelector(".espec>.input>textarea").value,token:"<%= user.token%>"}),
+            headers:{'Content-Type': 'application/json'}
+        })
+        <% }else{ %>
+            fetch("/updateData",{
+            method:"post",
+            body:JSON.stringify({id:USERCHAT.pac.id,diagnostico:document.querySelector(".espec>.input>textarea").value,token:"<%= user.token%>"}),
+            headers:{'Content-Type': 'application/json'}
+        })
+        <% } %>
+        .then(e=>alert("Se asigno"))
+    }
+</script>
+</html>

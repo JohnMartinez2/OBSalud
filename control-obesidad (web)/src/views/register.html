@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBSalud - Register</title>
+    <link rel="stylesheet" href="css/register.css">
+    <%- include ('partials/head.html')%>
+</head>
+
+<body>
+    <main>
+
+        <section class="principal">
+            <h2>OBSalud</h2>
+            <form onsubmit="return send()">
+                <h3>Registro</h3>
+                
+                <label for="nombre">Nombre completo</label>
+                <input type="text" name="name" required>
+                <label for="edad">Edad</label>
+                <input type="number" name="edad" required>
+                <label for="identidad">Numero de identidad</label>
+                <input type="number" name="identidad" required>
+                <label for="celular">Numero de celular</label>
+                <input type="number" name="celular" required><br>
+                <select name="rol" id="rol">
+                    <option >¿Que tipo de usuario eres?</option>
+                    <option value="1">Paciente</option>
+                    <option value="2">Nutricionista</option>
+                    <option value="3">Especialista</option>
+                </select>
+                <p></p>
+                <p1></p1>
+                <p2></p2>
+                <p3></p3>
+                <!--label for="peso">peso (Kg)</label>
+                <input type="number" name="peso" required>
+                <label for="altura">Altura (Cm)</label>
+                <input type="number" name="altura" required-->
+                <label for="email">Dirección de correo electrónico</label>
+                <input type="email" name="email" required>
+                <label for="password">Contraseña</label>
+                <input type="password" name="pass" required>
+                <button>Registrar</button>
+
+                <span></span>
+                <a href="login">¿Ya tienes cuenta?</a>
+                <a href="#">Política de tratamiento de datos personales</a>
+            </form>
+        </section>
+    </main>
+    <%- include ('partials/footer.html')%>
+</body>
+<script>
+    let seleccionar = document.querySelector('select')
+    let muestra = document.querySelector('p')
+    let muestra1 = document.querySelector('p1')
+    let muestra2 = document.querySelector('p2')
+    let muestra3 = document.querySelector('p3')
+
+    seleccionar.addEventListener('change', eleccion)
+    function eleccion(){
+        let selecion = seleccionar.value
+
+        if(selecion==="1"){
+            muestra.innerHTML = '<br><label for="peso">peso (Kg)</label>'
+            muestra1.innerHTML = '<input type="number" name="peso" required><br><br>'
+            muestra2.innerHTML = '<label for="altura">Altura (Cm)</label>'
+            muestra3.innerHTML = '<input type="number" name="altura" required>'
+        } else {
+            muestra.textContent = ''
+            muestra1.innerHTML = '<input type="hidden" name="peso" value="0" required>'
+            muestra2.textContent = ''
+            muestra3.innerHTML = '<input type="hidden" name="altura" value="0" required>'
+        }
+    }
+
+    function send(){
+        let inputs={}
+        document.querySelectorAll("input").forEach(element => {
+            inputs[element.name]=element.value
+        });
+        inputs.rol=document.querySelector("#rol").value
+        fetch("/signup",{
+            method:"post",
+            body:JSON.stringify({inputs}),
+            headers:{'Content-Type': 'application/json'}
+        }).then(e=>e.json())
+        .then(e=>{
+            if(e.est==200){
+                alert("Se registro de forma exitosa")
+            } else{
+                alert("Error "+e.msg)
+            }
+        })
+        return false;
+    }
+</script>
+</html>

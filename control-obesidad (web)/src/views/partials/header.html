@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="../css/partials/header.css">
+
+<% if(est==404){%>
+    <script>
+        location.href="/login"
+    </script>
+ <%}%>
+<header>
+    <div class="menu">
+        <div class="menu-bar">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="logo">
+            <br><br>
+            <h1>OBSalud</h1>
+            <h3>Control de Obesidad</h3>
+        </div>
+        <ul class="lista">
+            <% if(user.rol==1){%>
+                <li><a href="../home/<%= user.token %>">Inicio</a></li>
+            <% }else{%>
+                <li><a href="../homeDoc/<%= user.token %>">Inicio</a></li>
+            <% }%>
+            <% if(user.rol==1){%>
+                <li><a href="../perfil/<%= user.token %>">Perfil</a></li>
+            <% }else{%>
+                <li><a href=""></a></li>
+            <% }%>
+            <% if(user.rol==1){%>
+                <li><a href="../">Cerrar Sesion</a></li>
+            <% }else{%>
+                <li><a href="../">Cerrar Sesion</a></li>
+            <% }%>
+        </ul>
+    </div>
+    <div class="cuenta">
+        <ul>
+            <li><a class="btn-iniciar" href="login">Iniciar sesion</a></li>
+            <li><a class="btn-registro" href="register">Registrate</a></li>
+        </ul>
+    </div>
+    <div class="usuario">
+        <% if(user.name){ %> 
+            <a href="#"><img src="../img/logo-cuenta.png" alt=""><%= user.name %> </a>
+        <% } %> 
+    </div>
+
+</header>

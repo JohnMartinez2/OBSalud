@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OBSalud - Home</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <%- include ('partials/head.html')%>
+    
+</head>
+
+<body>
+   <%- include ('partials/header.html')%> 
+   <main>
+       
+        <section class="portada">
+
+            <div class="info">
+                <div class="texto">
+                    <h2>Bienvenido <%= user.name %> </h2>
+                    <h3>¿Que desea hacer?</h3>
+                    <a href="../calcImc/<%= user.token %>" >
+                        <i class="fas fa-arrow-right"></i>
+                        <p>Conocer mi IMC</p>
+                    </a>
+                    <a href="../vpacientes/<%= user.token %>">
+                        <i class="fas fa-arrow-right"></i>
+                        <p>Solicitud de consulta con especialista/nutricionista</p>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="imagen">
+                <img src="../img/portada2.jpg" alt="">
+            </div>
+        </section>
+
+    </main> 
+    <%- include ('partials/footer.html')%>
+</body>
+
+</html>
