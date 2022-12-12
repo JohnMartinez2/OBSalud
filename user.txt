@@ -1,0 +1,19 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+
+const TaskSchema = new Schema({
+    name: {type: String,required: true},
+    identidad: {type: Number,unique: true, required: true},
+    edad: {type: Number,required: true},
+    celular:{type: Number,required: true},
+    altura:{type: Number,required: true},
+    peso:{type: Number,required: true},
+    email:{type: String,unique:true,required: true},
+    pass:{type:String,required: true},
+    rol:{type:Number,required: true},
+    token:{type:String,default:""},
+    diagnostico:{type:String,default:""},
+    planNutricion:{type:String,default:""}
+    });
+module.exports = mongoose.model('user', TaskSchema)
